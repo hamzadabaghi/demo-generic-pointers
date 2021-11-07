@@ -25,6 +25,9 @@
 struct tableau {
     int nb_element;
     int taille_reel;
+    void (*affic)(void *);
+    void (*aleat)(void *);
+    void(*detru)(void *);
     void** tab ;
 };
 
@@ -32,24 +35,24 @@ typedef struct tableau* T ;
 
 /*  2- Définir une fonction creer permettant de créer un tableau générique de n éléments	 */
 
-T creer(int);
+T creer(int,int);
 
 /*  3- Définir une fonction afficher permettant d’afficher les éléments du tableau	 */
 
-void afficher(T);
+void afficher(T,int);
 
 /*	4- Définir une fonction aleatoire permettant de créer un tableau de n éléments initialisés aléatoirement */
 
-T  aleatoire(int);
+T  aleatoire(int,int,void (*affic)(void *),void (*aleat)(void *),void (*detru)(void *));
 
 
 /*  5- Définir une fonction detruire_tout permettant de libérer correctement la mémoire  */
 
-//void detruire_tout(T*);
+void detruire_tout(T);
 
 /* 6- Définir une fonction trier permettant de trier les éléments du tableau générique  */
 
-//T* trier(T*,int);
+void trier(T,int);
 
 
 
