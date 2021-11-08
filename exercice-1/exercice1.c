@@ -8,7 +8,7 @@
 /*  2- Définir une fonction creer permettant de créer un tableau générique de n éléments	 */
 
 T creer(int n,int taille_element) {
-	
+
 	T tab = (T) malloc(sizeof(struct tableau));
 	tab->nb_element = n;
 	tab->taille_reel = 0;
@@ -24,38 +24,38 @@ void afficher(T tab,int a) {
 	for(i=0; i < a; i++){
 		printf("valeur %d  : ",i+1);
 	    tab->affic(tab->tab[i]);
-	    
+
 	}
-	
+
 }
 
 /*	4- Définir une fonction aleatoire permettant de créer un tableau de n éléments initialisés aléatoirement */
 
-T  aleatoire(int n,int taille_element,void (*affic)(void *),void (*aleat)(void *),void (*detru)(void *)) {
-	
+T  aleatoire(int n,int taille_element,void (*affic)(void *),void* (*aleat)(),void (*detru)(void *)) {
+
 	int i ;
-	
+
 	/* create a generic table strut and passing functions to attributes */
 	T tab = creer(n,taille_element);
-	
+
 	tab->affic = affic;
 	tab->aleat = aleat;
 	tab->detru = detru;
 
 	for(i=0 ; i < tab->nb_element; i++){
-			
-					srand(time(0));
+
 					void * element;
-					tab->aleat(element);
-					tab->tab[i] = element;
+
+					tab->tab[i] =tab->aleat();
+
 					tab->taille_reel+=1;
-					
-					
+
+
 	}
-	return tab;	
-	
+	return tab;
+
 	}
-	
+
 
 
 
@@ -63,11 +63,11 @@ T  aleatoire(int n,int taille_element,void (*affic)(void *),void (*aleat)(void *
 
 /*
 void detruire_tout(T tableau) {
-	
+
 	tableau->taille_reel=0;
 	free(tableau->tab);
     free(tableau);
-    
+
 }
 */
 
@@ -75,19 +75,19 @@ void detruire_tout(T tableau) {
 
 /*
 void trier(T tableau ,int taille) {
-	
+
 	int i , j ;
 	void* c;
-	
+
 	for(i=0;i<taille-1;i++)
-	
+
     for(j=i+1;j<taille;j++)
         if ( tableau->tab[i] > tableau->tab[j] ) {
             c = &tableau->tab[i];
             tableau->tab[i] = tableau->tab[j];
             tableau->tab[j] = (int*)c;
         }
-	
-	
+
+
 }*/
 #endif
