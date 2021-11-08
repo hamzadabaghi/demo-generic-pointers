@@ -3,11 +3,11 @@
 
 
 /*
-   But 
+   But
    une structure permettant la gestion de tableaux génériques à une dimension en C
    La taille du tableau sera fixée au moment de sa création
-   il est necessaire de 
-   1-connaître le nombre d’éléments n présents dans le tableau 
+   il est necessaire de
+   1-connaître le nombre d’éléments n présents dans le tableau
    2-connaître la taille mémoire b du type de données qui sera stocké
 
 */
@@ -26,7 +26,7 @@ struct tableau {
     int nb_element;
     int taille_reel;
     void (*affic)(void *);
-    void (*aleat)(void *);
+    void* (*aleat)();
     void(*detru)(void *);
     void** tab ;
 };
@@ -43,7 +43,7 @@ void afficher(T,int);
 
 /*	4- Définir une fonction aleatoire permettant de créer un tableau de n éléments initialisés aléatoirement */
 
-T  aleatoire(int,int,void (*affic)(void *),void (*aleat)(void *),void (*detru)(void *));
+T  aleatoire(int,int,void (*affic)(void *),void* (*aleat)(),void (*detru)(void *));
 
 
 /*  5- Définir une fonction detruire_tout permettant de libérer correctement la mémoire  */
