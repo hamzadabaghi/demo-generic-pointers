@@ -1,1 +1,1 @@
-This is a private project
+Generic pointers and functions with c.
