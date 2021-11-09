@@ -22,39 +22,39 @@
 
 /*  1- Créer une structure tableau permettant de gérer des tableaux génériques     */
 
-struct tableau {
+struct tableau_variable {
     int nb_element;
     int taille_reel;
-    void (*affic)(struct tableau *);
+    void (*affic)(struct tableau_variable *);
     void* (*aleat)();
-    void(*detru)(struct tableau *);
+    void(*detru)(struct tableau_variable *);
     void** tab;
 };
 
-typedef struct tableau* T ;
+typedef struct tableau_variable* T_var;
 
 /*  2- Définir une fonction creer permettant de créer un tableau générique de n éléments	 */
 
-T creer(int,int);
+T_var creer_var(int,int);
 
 /*  3- Définir une fonction afficher permettant d’afficher les éléments du tableau	 */
 
-void afficher(T,int);
+void afficher_var(T_var,int);
 
 /*	4- Définir une fonction aleatoire permettant de créer un tableau de n éléments initialisés aléatoirement */
 
-T  aleatoire(int,int,void (*affic)(struct tableau *),void* (*aleat)(),void (*detru)(struct tableau *));
+T_var  aleatoire_var(int,int,void (*affic)(struct tableau_variable *),void* (*aleat)(),void (*detru)(struct tableau_variable *));
 
 
 /*  5- Définir une fonction detruire_tout permettant de libérer correctement la mémoire  */
 
-void detruire_tout(T);
-
-/* 6- Définir une fonction trier permettant de trier les éléments du tableau générique  */
-
-void trier(T,int);
+void detruire_tout(T_var);
 
 
+void push(T_var, void*, int);
+
+
+void* pop(T_var, int);
 
 #endif
 
