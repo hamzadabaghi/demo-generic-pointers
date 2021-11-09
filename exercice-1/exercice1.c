@@ -1,7 +1,5 @@
 #ifndef TAB_HAs
 #define	TAB_HAs
-
-
 #include "exercice1.h"
 
 /*  2- Définir une fonction creer permettant de créer un tableau générique de n éléments	 */
@@ -15,7 +13,7 @@ T creer(int n,int taille_element) {
 	return tab;
 }
 
-/*  3- Définir une fonction afficher permettant d’afficher les éléments du tableau	 */
+/*  3- Définir une fonction afficher permettant d’afficher les éléments du tableau , la fonction afficher executé est celle passé en parametre en main	 */
 
 void afficher(T tab,int a) {
 	int i;
@@ -28,9 +26,13 @@ void afficher(T tab,int a) {
 
 }
 
-/*	4- Définir une fonction aleatoire permettant de créer un tableau de n éléments initialisés aléatoirement */
+/*	4- Définir une fonction aleatoire permettant de créer un tableau de n éléments initialisés aléatoirement 
+	 - les méthodes qui seront executées sont celles passées en parametre en main
+	 - on crée un tableau et on le remplie par des valeurs aleatoires
 
-T  aleatoire(int n,int taille_element,void (*affic)(void *),void* (*aleat)(),void (*detru)(void *)) {
+*/
+
+T  aleatoire(int n,int taille_element,void (*affic)(struct tableau *),void* (*aleat)(),void (*detru)(struct tableau *)) {
 
 	int i ;
 
@@ -55,7 +57,10 @@ T  aleatoire(int n,int taille_element,void (*affic)(void *),void* (*aleat)(),voi
 
 
 
-/*  5- Définir une fonction detruire_tout permettant de libérer correctement la mémoire  */
+/*  5- Définir une fonction detruire_tout permettant de libérer correctement la mémoire 
+	 - mettre le nombre d'element à 0 puis liberer l'espace memoire
+		
+	 */
 
 
 void detruire_tout(T tableau) {
@@ -69,8 +74,12 @@ void detruire_tout(T tableau) {
 }
 
 
-/*  6- Définir une fonction trier permettant de trier les éléments du tableau générique  */
-
+/*  6- Définir une fonction trier permettant de trier les éléments du tableau générique 
+	 - le tri simple qui se passe sur la determination du minimum du tableau à chaque iteration i puis le placer dans 
+	   l'indice en question ( ordre croissant )
+	
+	 */
+ 
 
 void trier(T tableau ,int taille) {
 
@@ -84,10 +93,8 @@ void trier(T tableau ,int taille) {
 		            
 		        }
 	}
-       
-
-
-	}
+    }
     
 }
+
 #endif

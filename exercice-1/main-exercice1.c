@@ -8,14 +8,17 @@ struct test {
     long long int c;
 };
 
+typedef struct test Test;
+
 /* Affiche une variable de type struct test 
  * Cette fonction doit ensuite être utilisée dans la fonction afficher() 
  * pour afficher tous les éléments du tableau générique
  */
  
-void afficher_structure(void * value) {
+void afficher_structure(T value) {
 	
-	
+	Test *a_afficher = (Test *)value;
+    printf("a : %d | b : %d | c : %d \n",a_afficher->a,a_afficher->b,a_afficher->c);
 
 }
 
@@ -28,21 +31,22 @@ void* aleatoire_structure() {
 	
 	int inf = 1, sup = 9 , number;
 	number = ( rand() % (sup - inf + 1)) + inf;
-	struct test c ;
-	c.a = number;
-	c.b = ++number;
-	c.c = ++number;
-	int *ptr = (int*)malloc(sizeof(int));
-	memcpy(ptr,&number,sizeof(int));
+	Test str;
+	str.a = number;
+	str.b = ++number;
+	str.c = ++number;
+	Test *ptr = (Test *)malloc(sizeof(Test ));
+	memcpy(ptr,&str,sizeof(struct test ));
     return ptr;
 
 }
 
-void detruire_struct(void * value) {
-
+void detruire_struct(T tableau) {
+		free(tableau);
+		printf("la destruction est reussite");
 }
 
-void afficher_int(void *_val) {
+void afficher_int(T _val) {
 
     int *a_afficher = (int*)_val;
     printf("%d \n",*a_afficher);
@@ -68,6 +72,7 @@ int inf = 1 , sup = 9 ;
 void detruire_int(T tableau) {
 	
 	free(tableau);
+	printf("la destruction est reussite");
 }
 
 int main() {
@@ -76,6 +81,8 @@ int main() {
 
     T array = aleatoire(10, sizeof(int),&afficher_int,&aleatoire_int,&detruire_int);
     T array_1 = aleatoire(10, sizeof(struct test), &afficher_structure, &aleatoire_structure, &detruire_struct);
+    
+    // -----------------------------------------//
     
     printf("Tableau des entiers : \n\n");
     
@@ -90,13 +97,13 @@ int main() {
     detruire_tout(array); 
     
     
-    printf("Tableau des structures : \n\n");
+    printf("\n\nTableau des structures : \n\n");
 	printf("L\'affichage de array_1 : \n");
 	
-    //afficher(array_1,10);
-	// 
-    // afficher(array,10);
-    // detruire_tout(array_1); 
+    afficher(array_1,10);
+
+	printf("\nDestruction de array \n\n");
+    detruire_tout(array_1); 
 	
 
     return EXIT_SUCCESS;

@@ -25,9 +25,9 @@
 struct tableau {
     int nb_element;
     int taille_reel;
-    void (*affic)(void *);
+    void (*affic)(struct tableau *);
     void* (*aleat)();
-    void(*detru)(void *);
+    void(*detru)(struct tableau *);
     void** tab ;
 };
 
@@ -43,7 +43,7 @@ void afficher(T,int);
 
 /*	4- Définir une fonction aleatoire permettant de créer un tableau de n éléments initialisés aléatoirement */
 
-T  aleatoire(int,int,void (*affic)(void *),void* (*aleat)(),void (*detru)(void *));
+T  aleatoire(int,int,void (*affic)(struct tableau *),void* (*aleat)(),void (*detru)(struct tableau *));
 
 
 /*  5- Définir une fonction detruire_tout permettant de libérer correctement la mémoire  */
