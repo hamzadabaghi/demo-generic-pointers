@@ -72,14 +72,17 @@ int main() {
     T_var tableau = aleatoire_var(10, sizeof(int), &afficher_var_int, &aleatoire_int, &detruire_int);
     T_var tableau_1 = aleatoire_var(10, sizeof(struct test), &afficher_var_structure, &aleatoire_structure, &detruire_structure);
 
-    afficher_var(tableau, 10); // affichage de tableau
-    afficher_var(tableau_1, 10); // affichage de tableau_1
+	// affichage de tableau
+    afficher_var(tableau, 10); 
+    // affichage de tableau_1
+    afficher_var(tableau_1, 10); 
 
     int a = 8473843;
     push(tableau, a, sizeof(int)); 
 
-	//afficher_var(tableau, 11); // affichage de tableau
-//
+	// affichage de tableau
+	afficher_var(tableau, 11);
+
 //    pop(/* A COMPLETER */); // suppression du dernier élément de tableau
 //    pop(/* A COMPLETER */); // suppression du dernier élément de tableau
 //    pop(/* A COMPLETER */); // suppression du dernier élément de tableau_1
