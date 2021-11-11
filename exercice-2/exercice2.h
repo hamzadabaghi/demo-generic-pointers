@@ -28,6 +28,7 @@ struct tableau_variable {
     void (*affic)(struct tableau_variable *);
     void* (*aleat)();
     void(*detru)(struct tableau_variable *);
+    void* (*max)(struct tableau_variable *);
     void** tab;
 };
 
@@ -43,7 +44,7 @@ void afficher_var(T_var,int);
 
 /*	4- Définir une fonction aleatoire permettant de créer un tableau de n éléments initialisés aléatoirement */
 
-T_var  aleatoire_var(int,int,void (*affic)(struct tableau_variable *),void* (*aleat)(),void (*detru)(struct tableau_variable *));
+T_var  aleatoire_var(int,int,void (*affic)(struct tableau_variable *),void* (*aleat)(),void (*detru)(struct tableau_variable *), void* (*max)(struct tableau_variable *));
 
 
 /*  5- Définir une fonction detruire_tout permettant de libérer correctement la mémoire  */
@@ -55,6 +56,9 @@ void push(T_var, void*, int);
 
 
 void* pop(T_var, int);
+
+
+void* maximum(T_var);
 
 #endif
 

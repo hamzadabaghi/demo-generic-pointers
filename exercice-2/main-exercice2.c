@@ -48,29 +48,44 @@ void detruire_int(T_var tableau) {
 	printf("la destruction est reussite \n");
 }
 
-//void* push_int(int item){
-//	int element = item;
-//	int *ptr = (int*)malloc(sizeof(int));
-//    memcpy(ptr,&element,sizeof(int));
-//    return ptr;
-//}
-//
-//void* push_structure(Test item){
-//	Test element;
-//	element.a = item.a;
-//	element.b = item.b;
-//	element.c = item.c;
-//	Test *ptr = (int*)malloc(sizeof(Test));
-//    memcpy(ptr,&element,sizeof(Test));
-//    return ptr;
-//}	
+/* Le maximum de tableau des entiers */
+void* max_int(T_var tableau){
+	int i, *max = (int*)malloc(sizeof(int));
+	memcpy(max,tableau->tab[0],sizeof(int));	
+	for(i = 0; i < tableau->taille_reel; i++){
+		if((int*)tableau->tab[i] > max){
+			max = tableau->tab[i];
+		}
+	}
+	return *max;
+}
+
+
+/* Le maximum de tableau des elements de structure */
+void* max_struct(T_var tableau){
+	int i, max, sum;
+	Test* maxStruct = (Test*)malloc(sizeof(Test));
+	Test* countStruct = (Test*)malloc(sizeof(Test));
+	memcpy(maxStruct,tableau->tab[0],sizeof(struct test));
+	max = maxStruct->a + maxStruct->b + maxStruct->c;
+	for(i = 0; i < tableau->taille_reel; i++){
+		memcpy(countStruct, tableau->tab[i], sizeof(struct test));
+		sum = countStruct->a + countStruct->b + countStruct->c;
+		if(sum > max){
+			maxStruct = tableau->tab[i];
+			max = sum;
+		}
+	}
+	return maxStruct;
+}
+
 
 int main() {
 	
     srand(time(NULL));
 
-    T_var tableau = aleatoire_var(10, sizeof(int), &afficher_var_int, &aleatoire_int, &detruire_int);
-    T_var tableau_1 = aleatoire_var(10, sizeof(struct test), &afficher_var_structure, &aleatoire_structure, &detruire_structure);
+    T_var tableau = aleatoire_var(10, sizeof(int), &afficher_var_int, &aleatoire_int, &detruire_int, &max_int);
+    T_var tableau_1 = aleatoire_var(10, sizeof(struct test), &afficher_var_structure, &aleatoire_structure, &detruire_structure, &max_struct);
 
 	// affichage de tableau
     afficher_var(tableau, 10); 
@@ -78,11 +93,14 @@ int main() {
     afficher_var(tableau_1, 10); 
 
     int a = 8473843;
-    push(tableau, a, sizeof(int)); 
+    //push(tableau, a, sizeof(int)); 
 
 	// affichage de tableau
-	afficher_var(tableau, 11);
-
+	//afficher_var(tableau, 11);
+	printf("\nLe maximum du tableau des entiers : %d \n", maximum(tableau));
+	Test* maxStruct = (Test*)malloc(sizeof(Test));
+	memcpy(maxStruct, maximum(tableau1), sizeof(struct test));
+	printf("\nLe maximum du tableau de structure : a : %d | b : %d | c : %d \n", maxStruct->a, maxStruct->b, maxStruct->c);
 //    pop(/* A COMPLETER */); // suppression du dernier élément de tableau
 //    pop(/* A COMPLETER */); // suppression du dernier élément de tableau
 //    pop(/* A COMPLETER */); // suppression du dernier élément de tableau_1
