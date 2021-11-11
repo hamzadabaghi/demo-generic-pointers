@@ -32,7 +32,7 @@ void afficher_var(T_var tab,int a) {
 
 */
 
-T_var  aleatoire_var(int n,int taille_element,void (*affic)(struct tableau_variable *),void* (*aleat)(),void (*detru)(struct tableau_variable *)) {
+T_var  aleatoire_var(int n,int taille_element,void (*affic)(struct tableau_variable *),void* (*aleat)(),void (*detru)(struct tableau_variable *), void* (*max)(struct tableau_variable *)) {
 
 	int i ;
 
@@ -42,6 +42,7 @@ T_var  aleatoire_var(int n,int taille_element,void (*affic)(struct tableau_varia
 	tab->affic = affic;
 	tab->aleat = aleat;
 	tab->detru = detru;
+	tab->max = max;
 
 	for(i=0 ; i < tab->nb_element; i++){
 					void* element = tab->aleat();
@@ -76,9 +77,7 @@ void detruire_tout(T_var tableau) {
 void push(T_var tableau, void* item, int taille_element){
 	int* t = (int*)malloc(sizeof(int));
 	memcpy(t,&item,sizeof(int));
-	//printf("\n %d \n", *t);
 	if(tableau->taille_reel < tableau->nb_element){
-		//printf("\n 1 : %d \n", *t);
 		tableau->tab[tableau->taille_reel] = (int*)t;
 		tableau->taille_reel++;
 	}
@@ -86,20 +85,24 @@ void push(T_var tableau, void* item, int taille_element){
 	else{
 		tableau->nb_element = tableau->nb_element * 2;
 		int newSize = tableau->nb_element * taille_element;
-		printf("\n**Before realloc**\n");
 		tableau->tab = (void**)realloc(tableau->tab, newSize);
-		printf("\n**After realloc**\n");
 		tableau->tab[tableau->taille_reel] = (int*)t;
 		tableau->taille_reel++;
-		//printf("\n***Pushed***\n");
 	}
 	
 }
 
-
+/*
 void* pop(T_var tableau, int taille_element){
 	
 	return tableau->tab[tableau->taille_reel];
+}
+
+*/
+
+
+void* maximum(T_var tableau){
+	return tableau->max(tableau);
 }
 
 #endif
