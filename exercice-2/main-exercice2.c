@@ -87,19 +87,18 @@ int main() {
     T_var tableau = aleatoire_var(10, sizeof(int), &afficher_var_int, &aleatoire_int, &detruire_int, &max_int);
     T_var tableau_1 = aleatoire_var(10, sizeof(struct test), &afficher_var_structure, &aleatoire_structure, &detruire_structure, &max_struct);
 
-	// affichage de tableau
-    afficher_var(tableau, 10); 
-    // affichage de tableau_1
-    afficher_var(tableau_1, 10); 
+    afficher_var(tableau, 10); // affichage de tableau
+    afficher_var(tableau_1, 10); // affichage de tableau_1
 
     int a = 8473843;
     //push(tableau, a, sizeof(int)); 
-
+	afficher_var(tableau, 11); 
 	// affichage de tableau
 	//afficher_var(tableau, 11);
 	printf("\nLe maximum du tableau des entiers : %d \n", maximum(tableau));
 	Test* maxStruct = (Test*)malloc(sizeof(Test));
-	memcpy(maxStruct, maximum(tableau1), sizeof(struct test));
+	memcpy(maxStruct, maximum(tableau),sizeof(struct test));
+	
 	printf("\nLe maximum du tableau de structure : a : %d | b : %d | c : %d \n", maxStruct->a, maxStruct->b, maxStruct->c);
 //    pop(/* A COMPLETER */); // suppression du dernier élément de tableau
 //    pop(/* A COMPLETER */); // suppression du dernier élément de tableau

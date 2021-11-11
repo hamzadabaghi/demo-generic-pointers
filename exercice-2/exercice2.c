@@ -1,7 +1,6 @@
 #ifndef TAB_HAs
 #define	TAB_HAs
 #include "exercice2.h"
-#include<stdlib.h>
 
 /*  2- Définir une fonction creer permettant de créer un tableau générique de n éléments	 */
 
@@ -86,25 +85,24 @@ void push(T_var tableau, void* item, int taille_element){
 	else{
 		tableau->nb_element = tableau->nb_element * 2;
 		int newSize = tableau->nb_element * taille_element;
-		printf("\n**Before realloc**\n");
-		tableau->tab = realloc(tableau->tab, newSize);
-		printf("\n**After realloc**\n");
+		tableau->tab = (void**)realloc(tableau->tab, newSize);
 		tableau->tab[tableau->taille_reel] = (int*)t;
 		tableau->taille_reel++;
 	}
 	
 }
 
-
 /*
 void* pop(T_var tableau, int taille_element){
 	
 	return tableau->tab[tableau->taille_reel];
 }
+
 */
 
 
 void* maximum(T_var tableau){
 	return tableau->max(tableau);
 }
+
 #endif
